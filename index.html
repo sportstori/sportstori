@@ -1,1 +1,51 @@
-<p style="font-color:red">Hello World</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple To-Do App</title>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+  <h1 style="color: #333;">To-Do List</h1>
+  <div>
+    <input id="taskInput" type="text" placeholder="Enter a new task" style="padding: 10px; width: 200px; margin-right: 10px;">
+    <button onclick="addTask()" style="padding: 10px;">Add Task</button>
+  </div>
+  <ul id="taskList" style="list-style-type: none; padding: 0; margin-top: 20px;">
+  </ul>
+
+  <script>
+    function addTask() {
+      const taskInput = document.getElementById('taskInput');
+      const taskList = document.getElementById('taskList');
+
+      if (taskInput.value.trim() !== '') {
+        const listItem = document.createElement('li');
+        listItem.style.display = 'flex';
+        listItem.style.alignItems = 'center';
+        listItem.style.justifyContent = 'space-between';
+        listItem.style.padding = '10px';
+        listItem.style.borderBottom = '1px solid #ddd';
+
+        const taskText = document.createElement('span');
+        taskText.textContent = taskInput.value;
+        taskText.style.flexGrow = '1';
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.style.padding = '5px 10px';
+        deleteButton.style.marginLeft = '10px';
+        deleteButton.onclick = function() {
+          taskList.removeChild(listItem);
+        };
+
+        listItem.appendChild(taskText);
+        listItem.appendChild(deleteButton);
+        taskList.appendChild(listItem);
+
+        taskInput.value = '';
+      }
+    }
+  </script>
+</body>
+</html>
